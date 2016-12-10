@@ -10,7 +10,7 @@ const dbCon = dbConnection();
 
 app.post('/inventory/create', function(req, res) {
   var inventory = { 'name': req.query.name, 'quality': req.query.quality, 'description': req.query.description, 'unit': req.query.unit };
-  dbCon.query('INSERT INTO inventory SET ?', inventory, function(err, result) {
+  dbCon.query('INSERT INTO product_master SET ?', inventory, function(err, result) {
     if (err) throw err;
     console.log('Last insert ID:', result.insertId);
     res.send('Item added successfully ' + `Item ID is ${result.insertId}`);
@@ -21,7 +21,7 @@ app.post('/inventory/create', function(req, res) {
 app.post('/inventory/delete/:id', function(req, res) {
   console.log(req.params.id);
   dbCon.query(
-    'DELETE FROM inventory WHERE id = ?', [req.params.id],
+    'DELETE FROM product_master WHERE id = ?', [req.params.id],
     function(err, result) {
       if (err) throw err;
 
@@ -33,7 +33,7 @@ app.post('/inventory/delete/:id', function(req, res) {
 
 app.post('/inventory/update/:id', function(req, res) {
   dbCon.query(
-    'UPDATE inventory SET name = ?,quality= ?, description=?, unit= ? Where id = ?',
+    'UPDATE product_master SET name = ?,quality= ?, description=?, unit= ? Where id = ?',
      [req.query.name,req.query.quality,req.query.description,req.query.unit,req.params.id],
     function(err, result) {
       if (err) throw err;
@@ -45,7 +45,7 @@ app.post('/inventory/update/:id', function(req, res) {
 
 app.get('/inventory/list', function(req, res) {
   //res.send('ok gete');
-  dbCon.query('SELECT * FROM inventory', function(err, rows) {
+  dbCon.query('SELECT * FROM product_master', function(err, rows) {
     if (err) throw err;
     console.log('Data received from Db:\n');
     console.log(rows);
