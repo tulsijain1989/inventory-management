@@ -8,7 +8,9 @@
     "lint": "node_modules/.bin/eslint src tools scripts",
     "lint:watch": "npm run lint -- --watch"
   },
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "^1.15.2"
+  },
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
